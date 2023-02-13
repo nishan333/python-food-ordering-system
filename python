@@ -1,0 +1,42 @@
+menu = {
+  "Pizza": 10.99,
+  "Burger": 8.99,
+  "Taco": 5.99,
+  "Fries": 3.99,
+  "Drink": 1.99
+}
+
+order = []
+total = 0
+
+def show_menu():
+  print("Menu:")
+  for item, price in menu.items():
+    print(f"{item}: ${price}")
+
+def place_order(item, quantity):
+  global total
+  if item in menu:
+    cost = menu[item] * quantity
+    order.append((item, cost, quantity))
+    total += cost
+    print(f"{quantity}x {item} added to your order, totaling ${cost:.2f}.")
+  else:
+    print(f"Sorry, {item} is not available.")
+
+show_menu()
+
+while True:
+  item = input("What would you like to order? (Enter 'q' to finish) ")
+  if item == 'q':
+    break
+  if item in menu:
+    quantity = int(input("How many would you like? "))
+    place_order(item, quantity)
+  else:
+    print(f"Sorry, {item} is not available.")
+
+print("\nOrder summary:")
+for item, cost, quantity in order:
+  print(f"{quantity}x {item}: ${cost:.2f}")
+print(f"Total: ${total:.2f}")
